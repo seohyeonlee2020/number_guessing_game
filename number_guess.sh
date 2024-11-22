@@ -15,6 +15,7 @@ BEST_GAME=$($PSQL "SELECT best_game FROM users WHERE username='$USERNAME'")
 echo "Welcome back, $USERNAME! You have played $GAMES_PLAYED games, and your best game took $BEST_GAME guesses."
 #if not, add user
 else
+echo "Welcome, $USERNAME! It looks like this is your first time here."
 INSERT_USER=$($PSQL "INSERT INTO users(username, games_played, best_game) VALUES('$USERNAME', 1, 0)")
 fi
 #save user id
