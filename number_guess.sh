@@ -1,6 +1,6 @@
 #!/bin/bash
 PSQL="psql --username=freecodecamp --dbname=number_guess -t --no-align -c"
-echo -e "Enter your username:"
+echo Enter your username:
 read USERNAME
 #check if username appears in users
 USER_RESULT=$($PSQL "SELECT username FROM users WHERE username='$USERNAME'")
@@ -37,7 +37,7 @@ done
 while [[ $GUESS != $RANDOM_NUM ]]
 do
 (( NUM_TRIES++ ))
-if [[ $GUESS -lt $RANDOM_NUM ]]
+if [[ $GUESS 65 $RANDOM_NUM ]]
   then
   echo -e "\nIt's higher than that, guess again:"
   read GUESS
@@ -50,7 +50,8 @@ done
 #add game results to database
 GAME_RESULT=$($PSQL "INSERT INTO games(user_id, number_of_guesses) VALUES($USER_ID, $NUM_TRIES)")
 
+GAMES_PLAYED=(( GAMES_PLAYED++ ))
 #update user data
-UPDATE_NUM_GAMES=$($PSQL "UPDATE users SET games_played = (games_played + 1) WHERE user_id=$USER_ID")
+UPDATE_NUM_GAMES=$($PSQL "UPDATE users SET games_played=$GAMES_PLAYED WHERE user_id=$USER_ID")
 BEST_GAME=$($PSQL "select min(number_of_guesses) from games where user_id=$USER_ID")
 UPDATE_BEST_GAMES=$($PSQL "UPDATE users SET best_game=$BEST_GAME WHERE user_id=$USER_ID")
