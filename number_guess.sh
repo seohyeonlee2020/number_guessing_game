@@ -8,14 +8,15 @@ USER_RESULT=$($PSQL "SELECT username FROM users WHERE username='$USERNAME'")
 if [[ ! -z $USER_RESULT ]]
 then
 #get data
+USER_ID=$($PSQL "SELECT user_id FROM users WHERE username='$USERNAME'")
 GAMES_PLAYED=$($PSQL "SELECT games_played FROM users WHERE username='$USERNAME'")
-BEST_GAME=$($PSQL "SELECT best_game FROM users WHERE username='$USERNAME'")
+BEST_GAME=$($PSQL "SELECT MIN(number_of_guesses) FROM games WHERE user_id=$USER_ID")
 #print welcome
 echo "Welcome back, $USERNAME! You have played $GAMES_PLAYED games, and your best game took $BEST_GAME guesses."
 #if not, add user
 else
 echo "Welcome, $USERNAME! It looks like this is your first time here."
-INSERT_USER=$($PSQL "INSERT INTO users(username, games_played, best_game) VALUES('$USERNAME', 1, 0)")
+INSERT_USER=$($PSQL "INSERT INTO users(username, games_played, best_game) VALUES('$USERNAME', 1, NULL)")
 fi
 #save user id
 USER_ID=$($PSQL "SELECT user_id FROM users WHERE username='$USERNAME'")
@@ -51,6 +52,5 @@ GAME_RESULT=$($PSQL "INSERT INTO games(user_id, number_of_guesses) VALUES($USER_
 
 #update user data
 UPDATE_NUM_GAMES=$($PSQL "UPDATE users SET games_played = (games_played + 1) WHERE user_id=$USER_ID")
-BEST_GAME=$($PSQL "select min(number_of_guesses) from games where
-user_id=1")
+BEST_GAME=$($PSQL "select min(number_of_guesses) from games where user_id=$USER_ID")
 UPDATE_BEST_GAMES=$($PSQL "UPDATE users SET best_game=$BEST_GAME WHERE user_id=$USER_ID")
