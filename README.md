@@ -1,4 +1,4 @@
-# Number Guess Game
+# Number Guess Game ([한국어 README 링크](README_ko.md))
 
 ## Overview
 
