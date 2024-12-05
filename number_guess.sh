@@ -2,11 +2,11 @@
 
 #run database setup
 DB_USER=$(psql -t -c "SELECT CURRENT_USER")
-echo "DB_USER is: $DB_USER"
+#echo "DB_USER is: $DB_USER"
 DB_NAME="number_guess"
 
 #check if number_guess exists as a DB (grep the result of \l)
-DB_EXISTS=$(psql -t -c '\l' | grep -w 'number_guess')
+DB_EXISTS="psql -U $DB_USER -lt | grep -w '$DB_NAME'"
 #echo db exists: $DB_EXISTS
 if [[ -z $DB_EXISTS ]]
 then
@@ -75,6 +75,7 @@ GAMES_PLAYED=$($PSQL "SELECT count(*) FROM games WHERE user_id=$USER_ID")
 BEST_GAME=$($PSQL "SELECT MIN(number_of_guesses) FROM games WHERE user_id=$USER_ID")
 #print welcome
 echo "Welcome back, $USERNAME!"
+#echo games played: $GAMES_PLAYED, best: $BEST_GAME
 if [[ $GAMES_PLAYED == 0 ]]
 then
 echo -e "Looks like you haven't completed any games yet."
@@ -120,11 +121,12 @@ done
 #echo "USER_ID: $USER_ID, NUM_TRIES: $NUM_TRIES"
 GAME_RESULT=$($PSQL "INSERT INTO games(user_id, number_of_guesses) VALUES($USER_ID, $NUM_TRIES)")
 echo game records updated!
+GAME_ID=$($PSQL "SELECT max(game_id) FROM games")
 #echo games: $($PSQL "SELECT * FROM games")
 
 (( GAMES_PLAYED++ ))
 #update user data
 UPDATE_NUM_GAMES=$($PSQL "UPDATE users SET games_played=$GAMES_PLAYED WHERE user_id=$USER_ID")
-BEST_GAME=$($PSQL "select min(number_of_guesses) from games where user_id=$USER_ID")
+BEST_GAME=$($PSQL "select min(number_of_guesses) from games WHERE user_id=$USER_ID")
 UPDATE_BEST_GAMES=$($PSQL "UPDATE users SET best_game=$BEST_GAME WHERE user_id=$USER_ID")
 echo user data updated!
