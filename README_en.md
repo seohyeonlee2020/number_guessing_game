@@ -46,17 +46,23 @@ To start the game, run the following command:
 ./number_guess.sh
 ```
 
-You will be prompted to enter a username. If you're a new user, it will automatically add your data to the database. If you're a returning player, it will display your previous game statistics (total games played and best game performance).
+## How to Play
+
+1. Run the game script.
+2. Enter your username.
+3. The system will generate a secret number between 1 and 1000.
+4. Try to guess the number by entering a guess. The system will tell you if the number is higher or lower.
+5. Once you guess correctly, the game will show you how many attempts it took.
+6. The game will update your progress in the database.
 
 ### 5. Demo Videos
 
 Watch these demo videos to see how the game works and to understand what’s stored in the databases (`users` and `games`):
 
-- **[Demo Video 1: Gameplay](demo_gifs/number_guessing_game_demo.gif)** - Shows how to play the Number Guess Game.
-- **[Demo Video 2: Database Content](demo_gifs/psql_demo.gif)** - Displays what is stored in the `users` and `games` databases after gameplay.
+![Demo Video 1: Gameplay](demo_gifs/number_guessing_game_demo.gif)
 
 ## Database Structure
-
+![Demo Video 2: Database Content](demo_gifs/psql_demo.gif)
 - **users** table:
 
   - `user_id`: Unique ID for each user (Primary Key).
@@ -68,15 +74,6 @@ Watch these demo videos to see how the game works and to understand what’s sto
   - `game_id`: Unique ID for each game (Primary Key).
   - `user_id`: References the `user_id` from the `users` table (Foreign Key).
   - `number_of_guesses`: The number of guesses it took to guess the secret number.
-
-## How to Play
-
-1. Run the game script.
-2. Enter your username.
-3. The system will generate a secret number between 1 and 1000.
-4. Try to guess the number by entering a guess. The system will tell you if the number is higher or lower.
-5. Once you guess correctly, the game will show you how many attempts it took.
-6. The game will update your progress in the database.
 
 ## Contributing
 
