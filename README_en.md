@@ -1,4 +1,4 @@
-# Number Guess Game README
+# Number Guess Game
 
 ## Overview
 
