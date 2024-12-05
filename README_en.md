@@ -2,7 +2,7 @@
 
 ## Overview
 
-The **Number Guess Game** is a simple terminal-based game where players attempt to guess a secret number between 1 and 1000. Players can track their progress, including the number of games played and their best performance (fewest guesses). The game data is stored in a PostgreSQL database, allowing users to store their scores and track their history.
+This is a simple terminal-based game where players attempt to guess a secret number between 1 and 1000. Players can track their progress, including the number of games played and their best performance (fewest guesses). The game data is stored in a PostgreSQL database, allowing users to store their scores and track their history.
 
 ## Features
 
