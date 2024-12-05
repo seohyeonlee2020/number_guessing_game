@@ -24,7 +24,7 @@ DROP DATABASE number_guess;
 CREATE DATABASE number_guess WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'C.UTF-8' LC_CTYPE = 'C.UTF-8';
 
 
-ALTER DATABASE number_guess OWNER TO freecodecamp;
+ALTER DATABASE number_guess OWNER TO postgres;
 
 \connect number_guess
 
@@ -69,7 +69,7 @@ CREATE SEQUENCE public.games_game_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.games_game_id_seq OWNER TO freecodecamp;
+ALTER TABLE public.games_game_id_seq OWNER TO postgres;
 
 --
 -- Name: games_game_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: freecodecamp
@@ -90,7 +90,7 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO freecodecamp;
+ALTER TABLE public.users OWNER TO postgres;
 
 --
 -- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: freecodecamp
@@ -105,7 +105,7 @@ CREATE SEQUENCE public.users_user_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.users_user_id_seq OWNER TO freecodecamp;
+ALTER TABLE public.users_user_id_seq OWNER TO postgres;
 
 --
 -- Name: users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: freecodecamp
